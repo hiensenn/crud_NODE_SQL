@@ -38,24 +38,52 @@ app.post('/books/insertbook', (req, res) => {
     connection.query(sql, function(err){
         if(err){
             console.log(err)
+            return
         }
 
-        res.redirect('/')
+        //redirecionando para  atela inicial, caso o resultado seja positivo
+        res.redirect('/books')
     })
 
 })
 
 //resgatando dados, criando rota GET
-// app.get('/books', (req, res) => {
+ app.get('/books', (req, res) => {
     
-//     const sql = 'SELECT * FROM books';
+     const sql = 'SELECT * FROM books';
 
-//     connection.query(sql, function(err, data){
+     connection.query(sql, function(err, data){
+        if(err){
+            console.log(err)
+            return
+        }
 
-//     })
+        const books = data;
 
-// })
+       
 
+        res.render('books', {books})
+     })
+
+ })
+//encontrando dados, criando rota GET - SELECT
+
+app.get('/books/:id', (req, res) => {
+
+    const id = id.params.id
+    const sql = `SELECT * FROM books WHERE ID = ${id}`
+
+    connection.query(sql, function(err, data){
+        if(err){
+            console.log(err)
+            return
+        }
+
+        const book = data[0]
+
+        res.render('infobook', {book})
+    })
+})
 
 //conectando ao sql
 const connection = mysql.createConnection({
