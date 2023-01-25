@@ -40,6 +40,7 @@ app.post('/books/insertbook', (req, res) => {
             console.log(err)
             return
         }
+        
 
         //redirecionando para  atela inicial, caso o resultado seja positivo
         res.redirect('/books')
@@ -70,8 +71,8 @@ app.post('/books/insertbook', (req, res) => {
 
 app.get('/books/:id', (req, res) => {
 
-    const id = id.params.id
-    const sql = `SELECT * FROM books WHERE ID = ${id}`
+    const id = req.params.id
+    const sql = `SELECT * FROM books WHERE id = ${id}`
 
     connection.query(sql, function(err, data){
         if(err){
@@ -82,6 +83,61 @@ app.get('/books/:id', (req, res) => {
         const book = data[0]
 
         res.render('infobook', {book})
+    })
+})
+//Editando dados via :id
+app.get('/books/edit/:id', (req, res) => {
+
+    const id = req.params.id;
+    const sql = `SELECT * FROM  books  WHERE id = ${id}`;
+
+    connection.query(sql, function(err, data){
+        if(err){
+            console.log(err)
+            return
+        }
+
+        const book = data[0]
+
+        res.render('editbook', {book})
+
+    })
+
+})
+
+//Atualização de dados com Update
+
+app.post('/books/updatebook', (req, res) =>{
+    const id = req.body.id;
+    const title = req.body.title;
+    const pageqty = req.body.pageqty;
+
+    const sql = `UPDATE books SET title = '${title}', pageqty = '${pageqty}' WHERE id = ${id}`
+
+    connection.query(sql, function(err){
+        if(err){
+            console.log(err)
+            return
+        }
+
+        res.redirect('/books')
+
+    })
+})
+
+//Deletando dados
+app.post('/books/remove/:id', (req, res) => {
+    
+    const id = req.params.id;
+
+    const sql = `DELETE FROM books WHERE id = ${id}`
+    connection.query(sql, function(err){
+
+        if(err){
+            console.log(err)
+            return
+        }
+        res.redirect('/books')
     })
 })
 

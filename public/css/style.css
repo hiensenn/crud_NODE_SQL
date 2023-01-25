@@ -11,9 +11,23 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-   
+    
 }
-
+#navbar{
+    border-bottom: 1px solid #ccc;
+    padding: 1em;
+    margin-bottom: 1em;
+}
+#navbar ul{
+    display: flex;
+    list-style: none;
+}
+#navbar ul li{
+    margin-left: 2em;
+}
+#navbar ul li a{
+    text-decoration: none;
+}
 /* fim do estyle geral */
 
 /* página principal '/' */
@@ -94,3 +108,15 @@
     margin: 0 auto;
 }
 /* fim da página de resultados */
+
+/* Livros */
+
+#book-page{
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+    width: 50%;
+    margin: 0 auto;
+}
+.actions{
+    width: 100%;
+}

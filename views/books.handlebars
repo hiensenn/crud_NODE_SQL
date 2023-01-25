@@ -1,6 +1,6 @@
 <div class="container">
     <h1>Livros Disponíveis : </h1>
-    <button class="botao"><a href="/">Adcionar livros</a></button>
+    <button class="botao"><a href="/">Cadastrar livros</a></button>
     <div class="container-livros">
 
            
@@ -10,15 +10,14 @@
         
 
         {{#each books}}
-        <div class="livros">
-                    
-             
+            <div class="livros">
 
-                {{this.id}}  <span>{{this.title}}</span>  {{this.pageqty}}    
-           </div>
+                {{this.id}} <span><a href="/books/{{this.id}}">{{this.title}}</a> </span>  {{this.pageqty}}    
+           
+            </div>
                    
            
         {{/each}}
     </div>
-   
+    
 </div>
